@@ -48,20 +48,34 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Set variable1",
-							"type": "SetVariable",
+							"name": "If Condition1",
+							"type": "IfCondition",
 							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "valueprint",
-								"value": {
-									"value": "@item().table_name",
+								"expression": {
+									"value": "@if(\n    equals(item().load_type,'FULL'),\n    concat(item().table_name,' is FULL LOAD'),\n    concat(item().table_name,' is INCREMENTAL LOAD')\n)",
 									"type": "Expression"
-								}
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Set variable1",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "mess",
+											"value": {
+												"value": "@if(\n    equals(item().load_type,'FULL'),\n    concat(item().table_name,' is FULL LOAD'),\n    concat(item().table_name,' is INCREMENTAL LOAD')\n)",
+												"type": "Expression"
+											}
+										}
+									}
+								]
 							}
 						}
 					]
@@ -70,6 +84,9 @@
 		],
 		"variables": {
 			"valueprint": {
+				"type": "String"
+			},
+			"mess": {
 				"type": "String"
 			}
 		},
