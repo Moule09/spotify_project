@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(variables('file_type'),'csv')",
+						"value": "@equals(variables('file_type'),'csv111')",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
