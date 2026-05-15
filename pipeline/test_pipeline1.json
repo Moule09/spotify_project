@@ -1,0 +1,62 @@
+{
+	"name": "test_pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('file_type'),'csv')",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set variable2",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "message",
+								"value": "not a csv file"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "message",
+								"value": "csv"
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"file_type": {
+				"type": "String",
+				"defaultValue": "csv"
+			},
+			"message": {
+				"type": "String",
+				"defaultValue": "CSV FILE"
+			}
+		},
+		"annotations": []
+	}
+}
